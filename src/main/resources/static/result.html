@@ -1,0 +1,43 @@
+
+<!-- result.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Tweet Sentiment Analysis - Results</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+</head>
+<body>
+<h1>Analysis Results for Username: <span th:text="${username}"></span></h1>
+<h2>Positive Tweets: <span th:text="${posPercentage}"></span>%</h2>
+<h2>Negative Tweets: <span th:text="${negPercentage}"></span>%</h2>
+<h2>Neutral Tweets: <span th:text="${neuPercentage}"></span>%</h2>
+
+<!-- Add a canvas element for the pie chart -->
+<canvas id="pieChart" width="400" height="400"></canvas>
+
+<script>
+    // JavaScript code to create the pie chart
+    var ctx = document.getElementById('pieChart').getContext('2d');
+    var myPieChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Positive', 'Negative', 'Neutral'],
+            datasets: [{
+                data: [parseFloat(${posPercentage}), parseFloat(${negPercentage}), parseFloat(${neuPercentage})],
+                backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+                borderColor: '#FFFFFF',
+                borderWidth: 2
+            }]
+        },
+        options: {
+            responsive: false
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
